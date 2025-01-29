@@ -1,0 +1,163 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Group 36 Schedule</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 20px;
+                background-color: #f5f7fa;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                background-color: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .date-selector {
+                margin-bottom: 25px;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            select {
+                padding: 10px 15px;
+                font-size: 16px;
+                border: 2px solid #4CAF50;
+                border-radius: 6px;
+                background-color: white;
+                width: 250px;
+            }
+            .schedule-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 25px;
+                table-layout: fixed;
+            }
+            .schedule-table th {
+                background-color: #4CAF50;
+                color: white;
+                padding: 15px;
+                text-align: left;
+            }
+            .schedule-table td {
+                padding: 12px;
+                border-bottom: 1px solid #e0e0e0;
+                vertical-align: top;
+            }
+            .lecture {
+                background-color: #ffebee;
+                border-left: 4px solid #d32f2f;
+            }
+            .practical {
+                background-color: #e8f5e9;
+                border-left: 4px solid #2e7d32;
+            }
+            .time-column {
+                width: 12%;
+                font-weight: 500;
+                color: #37474f;
+            }
+            .day-column {
+                width: 15%;
+            }
+            .type-column {
+                width: 10%;
+            }
+            .subject-column {
+                width: 33%;
+            }
+            .lecturer-column {
+                width: 30%;
+                color: #546e7a;
+            }
+            .holiday {
+                background-color: #fff3e0;
+                color: #ef6c00;
+            }
+            .no-class {
+                color: #90a4ae;
+                font-style: italic;
+            }
+            h1 {
+                color: #2d3436;
+                margin-bottom: 25px;
+                border-bottom: 3px solid #4CAF50;
+                padding-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Medical University Schedule - Group 36</h1>
+            
+            <div class="date-selector">
+                <select id="dateSelect" onchange="showSchedule()">
+                    <option value="">Select a Date</option>
+                    <option value="03-02-2025">03-02-2025</option><option value="04-02-2025">04-02-2025</option><option value="05-02-2025">05-02-2025</option><option value="06-02-2025">06-02-2025</option><option value="07-02-2025">07-02-2025</option><option value="08-02-2025">08-02-2025</option><option value="10-02-2025">10-02-2025</option><option value="11-02-2025">11-02-2025</option><option value="12-02-2025">12-02-2025</option><option value="13-02-2025">13-02-2025</option><option value="14-02-2025">14-02-2025</option><option value="15-02-2025">15-02-2025</option><option value="17-02-2025">17-02-2025</option><option value="18-02-2025">18-02-2025</option><option value="19-02-2025">19-02-2025</option><option value="20-02-2025">20-02-2025</option><option value="21-02-2025">21-02-2025</option><option value="22-02-2025">22-02-2025</option><option value="24-02-2025">24-02-2025</option><option value="25-02-2025">25-02-2025</option><option value="26-02-2025">26-02-2025</option><option value="27-02-2025">27-02-2025</option><option value="28-02-2025">28-02-2025</option><option value="01-03-2025">01-03-2025</option><option value="03-03-2025">03-03-2025</option><option value="04-03-2025">04-03-2025</option><option value="05-03-2025">05-03-2025</option><option value="06-03-2025">06-03-2025</option><option value="07-03-2025">07-03-2025</option><option value="08-03-2025">08-03-2025</option>
+                </select>
+            </div>
+
+            <div id="scheduleDisplay"></div>
+        </div>
+
+        <script>
+            const scheduleData = {
+                "03-02-2025": [{'time': '08:00-09:35', 'day': 'Monday', 'subject': 'Topographic anatomy', 'type': 'lecture', 'lecturer': 'Rahmatov Nurgazy Akylbekovich'}, {'time': '10:00-11:35', 'day': 'Monday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'lecture', 'lecturer': 'Sulaymanova Cholpon Tashtanbekovna'}, {'time': '12:00-13:35', 'day': 'Monday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '14:00-15:35', 'day': 'Monday', 'subject': 'Introduction to Therapy', 'type': 'lecture', 'lecturer': 'Kamchybekova Altynay Abdanbekovna'}, {'time': '16:00-17:35', 'day': 'Monday', 'subject': 'Introduction to Therapy', 'type': 'lecture', 'lecturer': 'Kamchybekova Altynay Abdanbekovna'}],"04-02-2025": [{'time': '08:00-09:35', 'day': 'Tuesday', 'subject': 'Elective courses: Scientific Research Method', 'type': 'lecture', 'lecturer': 'Iliazova Nurgul Bolotbekovna'}, {'time': '10:00-11:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}],"05-02-2025": [{'time': '08:00-09:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Wednesday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '12:00-13:35', 'day': 'Wednesday', 'subject': 'Topographic anatomy', 'type': 'practical', 'lecturer': 'Toktobekova Astra Toktobekovna'}, {'time': '14:00-15:35', 'day': 'Wednesday', 'subject': 'Pathological physiology', 'type': 'practical', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '16:00-17:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}],"06-02-2025": [{'time': '08:00-09:35', 'day': 'Thursday', 'subject': 'Pathological physiology', 'type': 'lecture', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '10:00-11:35', 'day': 'Thursday', 'subject': 'Introduction to Therapy', 'type': 'lecture', 'lecturer': 'Kamchybekova Altynay Abdanbekovna'}, {'time': '12:00-13:35', 'day': 'Thursday', 'subject': 'Topographic anatomy', 'type': 'practical', 'lecturer': 'Toktobekova Astra Toktobekovna'}, {'time': '14:00-15:35', 'day': 'Thursday', 'subject': 'Kyrgyz language', 'type': 'practical', 'lecturer': 'Turatbek Kyzy Zhazgul'}, {'time': '16:00-17:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}],"07-02-2025": [{'time': '08:00-09:35', 'day': 'Friday', 'subject': 'Introduction to Therapy', 'type': 'lecture', 'lecturer': 'Kamchybekova Altynay Abdanbekovna'}, {'time': '10:00-11:35', 'day': 'Friday', 'subject': 'Pathological physiology', 'type': 'lecture', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '12:00-13:35', 'day': 'Friday', 'subject': 'Psychology', 'type': 'practical', 'lecturer': 'Ismailov Meder Uraimzhanovich'}, {'time': '14:00-15:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Friday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'practical', 'lecturer': 'Shotarbaeva Shahadat Kamilovna'}],"08-02-2025": [{'time': '08:00-09:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Saturday', 'subject': 'Basic Pharmacology', 'type': 'practical', 'lecturer': 'Dzhumashaliyeva Nargiza Sharshembekovna'}],"10-02-2025": [{'time': '08:00-09:35', 'day': 'Monday', 'subject': 'Introduction to Therapy', 'type': 'lecture', 'lecturer': 'Kamchybekova Altynay Abdanbekovna'}, {'time': '10:00-11:35', 'day': 'Monday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'lecture', 'lecturer': 'Sulaymanova Cholpon Tashtanbekovna'}, {'time': '12:00-13:35', 'day': 'Monday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '14:00-15:35', 'day': 'Monday', 'subject': 'Psychology', 'type': 'lecture', 'lecturer': 'Zhoosheva Elnura Almazbekovna'}, {'time': '16:00-17:35', 'day': 'Monday', 'subject': 'Introduction to Pediatrics', 'type': 'lecture', 'lecturer': 'Nazhimidinova Gulmira Tashaliyevna'}],"11-02-2025": [{'time': '08:00-09:35', 'day': 'Tuesday', 'subject': 'Introduction to Pediatrics', 'type': 'lecture', 'lecturer': 'Nazhimidinova Gulmira Tashaliyevna'}, {'time': '10:00-11:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Tuesday', 'subject': 'Introduction to Pediatrics', 'type': 'practical', 'lecturer': 'Nayzabekova Salima Dzhumasanovna'}],"12-02-2025": [{'time': '08:00-09:35', 'day': 'Wednesday', 'subject': 'Introduction to Pediatrics', 'type': 'lecture', 'lecturer': 'Nazhimidinova Gulmira Tashaliyevna'}, {'time': '10:00-11:35', 'day': 'Wednesday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '12:00-13:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Wednesday', 'subject': 'Pathological physiology', 'type': 'practical', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '16:00-17:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}],"13-02-2025": [{'time': '08:00-09:35', 'day': 'Thursday', 'subject': 'Medical Equipment', 'type': 'lecture', 'lecturer': 'Skorobogatova Oksana Vladimirovna'}, {'time': '10:00-11:35', 'day': 'Thursday', 'subject': 'Introduction to Pediatrics', 'type': 'lecture', 'lecturer': 'Nazhimidinova Gulmira Tashaliyevna'}, {'time': '12:00-13:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Thursday', 'subject': 'Kyrgyz language', 'type': 'practical', 'lecturer': 'Turatbek Kyzy Zhazgul'}, {'time': '16:00-17:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}],"14-02-2025": [{'time': '08:00-09:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Friday', 'subject': 'Pathological physiology', 'type': 'lecture', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '12:00-13:35', 'day': 'Friday', 'subject': 'Elective courses: Scientific Research Method', 'type': 'practical', 'lecturer': 'Iliazova Nurgul Bolotbekovna'}, {'time': '14:00-15:35', 'day': 'Friday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'practical', 'lecturer': 'Shotarbaeva Shahadat Kamilovna'}, {'time': '16:00-17:35', 'day': 'Friday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'practical', 'lecturer': 'Shotarbaeva Shahadat Kamilovna'}],"15-02-2025": [{'time': '08:00-09:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Saturday', 'subject': 'Basic Pharmacology', 'type': 'practical', 'lecturer': 'Dzhumashaliyeva Nargiza Sharshembekovna'}],"17-02-2025": [{'time': '08:00-09:35', 'day': 'Monday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Monday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'lecture', 'lecturer': 'Sulaymanova Cholpon Tashtanbekovna'}, {'time': '12:00-13:35', 'day': 'Monday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '14:00-15:35', 'day': 'Monday', 'subject': 'Introduction to Pediatrics', 'type': 'practical', 'lecturer': 'Nayzabekova Salima Dzhumasanovna'}, {'time': '16:00-17:35', 'day': 'Monday', 'subject': '', 'type': '', 'lecturer': ''}],"18-02-2025": [{'time': '08:00-09:35', 'day': 'Tuesday', 'subject': 'Elective courses: Scientific Research Method', 'type': 'lecture', 'lecturer': 'Iliazova Nurgul Bolotbekovna'}, {'time': '10:00-11:35', 'day': 'Tuesday', 'subject': 'Medical Equipment', 'type': 'practical', 'lecturer': 'Murzaliyeva Erkeayym Nurbekovna'}, {'time': '12:00-13:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Tuesday', 'subject': 'Introduction to Pediatrics', 'type': 'practical', 'lecturer': 'Nayzabekova Salima Dzhumasanovna'}, {'time': '16:00-17:35', 'day': 'Tuesday', 'subject': 'Introduction to Therapy', 'type': 'practical', 'lecturer': 'Moldobayeva Asylkan Zamirbekovna'}],"19-02-2025": [{'time': '08:00-09:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Wednesday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '12:00-13:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Wednesday', 'subject': 'Introduction to Pediatrics', 'type': 'practical', 'lecturer': 'Nayzabekova Salima Dzhumasanovna'}],"20-02-2025": [{'time': '08:00-09:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Thursday', 'subject': 'Medical Equipment', 'type': 'practical', 'lecturer': 'Murzaliyeva Erkeayym Nurbekovna'}, {'time': '12:00-13:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Thursday', 'subject': 'Kyrgyz language', 'type': 'practical', 'lecturer': 'Turatbek Kyzy Zhazgul'}, {'time': '16:00-17:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}],"21-02-2025": [{'time': '08:00-09:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Friday', 'subject': 'Psychology', 'type': 'practical', 'lecturer': 'Ismailov Meder Uraimzhanovich'}, {'time': '14:00-15:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Friday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'practical', 'lecturer': 'Shotarbaeva Shahadat Kamilovna'}],"22-02-2025": [{'time': '08:00-09:35', 'day': 'Saturday', 'subject': 'Pathological physiology', 'type': 'practical', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '10:00-11:35', 'day': 'Saturday', 'subject': 'Pathological physiology', 'type': 'practical', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '12:00-13:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Saturday', 'subject': 'Introduction to Therapy', 'type': 'practical', 'lecturer': 'Moldobayeva Asylkan Zamirbekovna'}, {'time': '16:00-17:35', 'day': 'Saturday', 'subject': 'Basic Pharmacology', 'type': 'practical', 'lecturer': 'Dzhumashaliyeva Nargiza Sharshembekovna'}],"24-02-2025": [{'time': '08:00-09:35', 'day': 'Monday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Monday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'lecture', 'lecturer': 'Sulaymanova Cholpon Tashtanbekovna'}, {'time': '12:00-13:35', 'day': 'Monday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '14:00-15:35', 'day': 'Monday', 'subject': 'Psychology', 'type': 'lecture', 'lecturer': 'Zhoosheva Elnura Almazbekovna'}, {'time': '16:00-17:35', 'day': 'Monday', 'subject': '', 'type': '', 'lecturer': ''}],"25-02-2025": [{'time': '08:00-09:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Tuesday', 'subject': 'Medical Equipment', 'type': 'practical', 'lecturer': 'Murzaliyeva Erkeayym Nurbekovna'}, {'time': '16:00-17:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}],"26-02-2025": [{'time': '08:00-09:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Wednesday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '12:00-13:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Wednesday', 'subject': 'Introduction to Therapy', 'type': 'practical', 'lecturer': 'Moldobayeva Asylkan Zamirbekovna'}, {'time': '16:00-17:35', 'day': 'Wednesday', 'subject': 'Introduction to Pediatrics', 'type': 'practical', 'lecturer': 'Nayzabekova Salima Dzhumasanovna'}],"27-02-2025": [{'time': '08:00-09:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Thursday', 'subject': 'Kyrgyz language', 'type': 'practical', 'lecturer': 'Turatbek Kyzy Zhazgul'}, {'time': '16:00-17:35', 'day': 'Thursday', 'subject': 'Introduction to Therapy', 'type': 'practical', 'lecturer': 'Moldobayeva Asylkan Zamirbekovna'}],"28-02-2025": [{'time': '08:00-09:35', 'day': 'Friday', 'subject': 'Pathological physiology', 'type': 'practical', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '10:00-11:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Friday', 'subject': 'Elective courses: Scientific Research Method', 'type': 'practical', 'lecturer': 'Iliazova Nurgul Bolotbekovna'}, {'time': '14:00-15:35', 'day': 'Friday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'practical', 'lecturer': 'Shotarbaeva Shahadat Kamilovna'}, {'time': '16:00-17:35', 'day': 'Friday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'practical', 'lecturer': 'Shotarbaeva Shahadat Kamilovna'}],"01-03-2025": [{'time': '08:00-09:35', 'day': 'Saturday', 'subject': 'Pathological physiology', 'type': 'practical', 'lecturer': 'Turdakunova Raushan Mahmudovna'}, {'time': '10:00-11:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Saturday', 'subject': 'Introduction to Therapy', 'type': 'practical', 'lecturer': 'Moldobayeva Asylkan Zamirbekovna'}, {'time': '16:00-17:35', 'day': 'Saturday', 'subject': 'Basic Pharmacology', 'type': 'practical', 'lecturer': 'Dzhumashaliyeva Nargiza Sharshembekovna'}],"03-03-2025": [{'time': '08:00-09:35', 'day': 'Monday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Monday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'lecture', 'lecturer': 'Sulaymanova Cholpon Tashtanbekovna'}, {'time': '12:00-13:35', 'day': 'Monday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '14:00-15:35', 'day': 'Monday', 'subject': 'Introduction to Pediatrics', 'type': 'practical', 'lecturer': 'Nayzabekova Salima Dzhumasanovna'}, {'time': '16:00-17:35', 'day': 'Monday', 'subject': '', 'type': '', 'lecturer': ''}],"04-03-2025": [{'time': '08:00-09:35', 'day': 'Tuesday', 'subject': 'Elective courses: Scientific Research Method', 'type': 'lecture', 'lecturer': 'Iliazova Nurgul Bolotbekovna'}, {'time': '10:00-11:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Tuesday', 'subject': 'Introduction to Therapy', 'type': 'practical', 'lecturer': 'Moldobayeva Asylkan Zamirbekovna'}, {'time': '14:00-15:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Tuesday', 'subject': '', 'type': '', 'lecturer': ''}],"05-03-2025": [{'time': '08:00-09:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Wednesday', 'subject': 'Basic Pharmacology', 'type': 'lecture', 'lecturer': 'Bukarayeva Kurmanzhan Erkinovna'}, {'time': '12:00-13:35', 'day': 'Wednesday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Wednesday', 'subject': 'Introduction to Therapy', 'type': 'practical', 'lecturer': 'Moldobayeva Asylkan Zamirbekovna'}, {'time': '16:00-17:35', 'day': 'Wednesday', 'subject': 'Introduction to Pediatrics', 'type': 'practical', 'lecturer': 'Nayzabekova Salima Dzhumasanovna'}],"06-03-2025": [{'time': '08:00-09:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Thursday', 'subject': 'Introduction to Therapy', 'type': 'practical', 'lecturer': 'Moldobayeva Asylkan Zamirbekovna'}, {'time': '14:00-15:35', 'day': 'Thursday', 'subject': 'Kyrgyz language', 'type': 'practical', 'lecturer': 'Turatbek Kyzy Zhazgul'}, {'time': '16:00-17:35', 'day': 'Thursday', 'subject': '', 'type': '', 'lecturer': ''}],"07-03-2025": [{'time': '08:00-09:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Friday', 'subject': 'Psychology', 'type': 'practical', 'lecturer': 'Ismailov Meder Uraimzhanovich'}, {'time': '14:00-15:35', 'day': 'Friday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Friday', 'subject': 'Microbiology, Virology, Immunology', 'type': 'practical', 'lecturer': 'Shotarbaeva Shahadat Kamilovna'}],"08-03-2025": [{'time': '08:00-09:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '10:00-11:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '12:00-13:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '14:00-15:35', 'day': 'Saturday', 'subject': '', 'type': '', 'lecturer': ''}, {'time': '16:00-17:35', 'day': 'Saturday', 'subject': 'Holiday', 'type': 'holiday', 'lecturer': ''}]
+            };
+
+            function showSchedule() {
+                const selectedDate = document.getElementById('dateSelect').value;
+                const displayDiv = document.getElementById('scheduleDisplay');
+                
+                if (!selectedDate) {
+                    displayDiv.innerHTML = '';
+                    return;
+                }
+
+                let html = `<h3>Schedule for ${selectedDate}</h3>`;
+                html += `<table class="schedule-table">`;
+                html += `
+                    <tr>
+                        <th class="time-column">Time</th>
+                        <th class="day-column">Day</th>
+                        <th class="type-column">Type</th>
+                        <th class="subject-column">Subject</th>
+                        <th class="lecturer-column">Lecturer</th>
+                    </tr>`;
+
+                scheduleData[selectedDate].forEach(item => {
+                    const typeClass = item.type === 'lecture' ? 'lecture' : 
+                                    item.type === 'practical' ? 'practical' :
+                                    item.type === 'holiday' ? 'holiday' : '';
+                    
+                    const typeDisplay = item.type ? 
+                        item.type.charAt(0).toUpperCase() + item.type.slice(1) : 
+                        '';
+
+                    html += `
+                    <tr>
+                        <td class="time-column">${item.time}</td>
+                        <td class="day-column">${item.day}</td>
+                        <td class="type-column ${typeClass}">${typeDisplay}</td>
+                        <td class="subject-column">${item.subject || '<span class="no-class">Free time</span>'}</td>
+                        <td class="lecturer-column">${item.lecturer || ''}</td>
+                    </tr>`;
+                });
+
+                html += `</table>`;
+                displayDiv.innerHTML = html;
+            }
+        </script>
+        
+        <div style="text-align: center; margin: 30px 0; color: #666; font-size: 0.9em;">
+            Created by Mayank
+        </div>
+    </body>
+    </html>
+    
